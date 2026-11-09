@@ -2,14 +2,14 @@
 Shared data for the Mood Machine lab.
 
 This file defines:
-  - POSITIVE_WORDS: starter list of positive words
-  - NEGATIVE_WORDS: starter list of negative words
-  - SAMPLE_POSTS: short example posts for evaluation and training
-  - TRUE_LABELS: human labels for each post in SAMPLE_POSTS
+- POSITIVE_WORDS: starter list of positive words
+- NEGATIVE_WORDS: starter list of negative words
+- SAMPLE_POSTS: short example posts for evaluation and training
+- TRUE_LABELS: human labels for each post in SAMPLE_POSTS
 """
 
 # ---------------------------------------------------------------------
-# Starter word lists
+# Word lists (starter words + my additions)
 # ---------------------------------------------------------------------
 
 POSITIVE_WORDS = [
@@ -23,6 +23,15 @@ POSITIVE_WORDS = [
     "chill",
     "relaxed",
     "amazing",
+    # added: emotions and slang seen in my new posts
+    "proud",
+    "hopeful",
+    "blessed",
+    "grateful",
+    "fire",
+    "lit",
+    "win",
+    "thrilled",
 ]
 
 NEGATIVE_WORDS = [
@@ -36,28 +45,48 @@ NEGATIVE_WORDS = [
     "stressed",
     "hate",
     "boring",
+    # added
+    "exhausted",
+    "annoyed",
+    "anxious",
+    "ugh",
+    "worst",
+    "drained",
+    "sucks",
+    "miserable",
 ]
 
+# Emoji / emoticon signals (used by mood_analyzer.py)
+POSITIVE_EMOJIS = ["🔥", "😊", "😍", "🥳", "❤", ":)", ":-)"]
+NEGATIVE_EMOJIS = ["😭", "😢", "😡", "😞", ":(", ":-("]
+
 # ---------------------------------------------------------------------
-# Starter labeled dataset
+# Labeled dataset
 # ---------------------------------------------------------------------
 
-# Short example posts written as if they were social media updates or messages.
 SAMPLE_POSTS = [
+    # --- starter posts ---
     "I love this class so much",
     "Today was a terrible day",
     "Feeling tired but kind of hopeful",
     "This is fine",
     "So excited for the weekend",
     "I am not happy about this",
+    # --- my new posts ---
+    "Lowkey stressed but kind of proud of myself",
+    "I absolutely love getting stuck in traffic",
+    "no cap that concert was fire 🔥",
+    "Ugh this is the worst 😭",
+    "I'm fine 🙂",
+    "Got the job!!! so happy 😂",
+    "not bad at all",
+    "Just got back from the store",
+    "Feeling blessed and grateful today",
+    "so tired of this but the team is amazing",
 ]
 
 # Human labels for each post above.
-# Allowed labels in the starter:
-#   - "positive"
-#   - "negative"
-#   - "neutral"
-#   - "mixed"
+# Allowed labels: "positive", "negative", "neutral", "mixed"
 TRUE_LABELS = [
     "positive",  # "I love this class so much"
     "negative",  # "Today was a terrible day"
@@ -65,30 +94,16 @@ TRUE_LABELS = [
     "neutral",   # "This is fine"
     "positive",  # "So excited for the weekend"
     "negative",  # "I am not happy about this"
+    "mixed",     # "Lowkey stressed but kind of proud of myself"
+    "negative",  # "I absolutely love getting stuck in traffic" (sarcasm)
+    "positive",  # "no cap that concert was fire 🔥"
+    "negative",  # "Ugh this is the worst 😭"
+    "neutral",   # "I'm fine 🙂" (ambiguous: could be masking a bad mood)
+    "positive",  # "Got the job!!! so happy 😂"
+    "positive",  # "not bad at all"
+    "neutral",   # "Just got back from the store"
+    "positive",  # "Feeling blessed and grateful today"
+    "mixed",     # "so tired of this but the team is amazing"
 ]
 
-# TODO: Add 5-10 more posts and labels.
-#
-# Requirements:
-#   - For every new post you add to SAMPLE_POSTS, you must add one
-#     matching label to TRUE_LABELS.
-#   - SAMPLE_POSTS and TRUE_LABELS must always have the same length.
-#   - Include a variety of language styles, such as:
-#       * Slang ("lowkey", "highkey", "no cap")
-#       * Emojis (":)", ":(", "🥲", "😂", "💀")
-#       * Sarcasm ("I absolutely love getting stuck in traffic")
-#       * Ambiguous or mixed feelings
-#
-# Tips:
-#   - Try to create some examples that are hard to label even for you.
-#   - Make a note of any examples that you and a friend might disagree on.
-#     Those "edge cases" are interesting to inspect for both the rule based
-#     and ML models.
-#
-# Example of how you might extend the lists:
-#
-# SAMPLE_POSTS.append("Lowkey stressed but kind of proud of myself")
-# TRUE_LABELS.append("mixed")
-#
-# Remember to keep them aligned:
-#   len(SAMPLE_POSTS) == len(TRUE_LABELS)
+assert len(SAMPLE_POSTS) == len(TRUE_LABELS), "SAMPLE_POSTS and TRUE_LABELS must be the same length"
